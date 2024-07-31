@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishMarket Connect</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <img src="FishMarket Connect Logo.png" alt="FishMarket Connect Logo" class="logo" width="200" height="200">
+        <h1>FishMarket Connect</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#prices">Prices</a></li>
+                <li><a href="#orders">Order Tracking</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#forums">Forums</a></li>
+                <li><a href="#login">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to FishMarket Connect</h2>
+        <p>Linking Fishers to the Market.</p>
+        <p>We enhance the value chain of small-scale fisheries in Mombasa and connect them to the international market. Our main focus is on strengthening market linkages.</p>
+        <h2>Objectives</h2>
+        <p>1. Provide Real-Time Market Information: Ensure fishers have access to current market prices, demand forecasts, and trends to make informed decisions.</p>
+        <p>2. Enhance Market Access: Facilitate better market access by connecting fishers with international buyers and markets.</p>
+        <p>3. Improve Decision-Making: Empower fishers to plan their catch and sales strategies based on reliable market data.</p>
+        <p>4. Increase Income: By having access to real-time market information, fishers can optimize their sales for higher profits.</p>
+        <div id="FishGallery">Fish Gallery: </div>
+    </section>
+    
+    <div class="gallery">
+        <img src="Assorted Fish.jpg" alt="Fish 1" width="200" height="200">
+        <img src="Fish photo.jpg" alt="Fish 2" width="200" height="200">
+        <img src="Tilapia fish.jpg" alt="Fish 3" width="200" height="200">
+        <img src="Red Snapper.jpg" alt="Fish 4" width="200" height="200">
+        <img src="Sea Food.jpg" alt="Fish 5" width="200" height="200">
+        <img src="Small fish.jpg" alt="Fish 6" width="200" height="200">
+        <img src="Tuna Fish.jpg" alt="Fish 7" width="200" height="200">
+        <!-- Add more fish images as needed -->
+    </div>
+
+    <section id="prices">
+    </section>
+
+    <section id="orders">
+        <h2>Order Tracking</h2>
+        <div id="orderList"></div>
+        <div class="order">
+            <h2>Order #001</h2>
+            <div class="order-details">
+                <div>
+                    <p><strong>Fish Type:</strong> Tuna</p>
+                    <p><strong>Quantity:</strong> 500 kg</p>
+                </div>
+                <div>
+                    <p><strong>Buyer:</strong> Ocean Delights Ltd.</p>
+                    <p><strong>Estimated Delivery:</strong> July 25, 2024</p>
+                </div>
+            </div>
+            <p><strong>Status:</strong> <span class="order-status">In Transit</span></p>
+        </div>
+        
+        <div class="order">
+            <h2>Order #002</h2>
+            <div class="order-details">
+                <div>
+                    <p><strong>Fish Type:</strong> Salmon</p>
+                    <p><strong>Quantity:</strong> 300 kg</p>
+                </div>
+                <div>
+                    <p><strong>Buyer:</strong> Fresh Catch Co.</p>
+                    <p><strong>Estimated Delivery:</strong> July 26, 2024</p>
+                </div>
+            </div>
+            <p><strong>Status:</strong> <span class="order-status">Processing</span></p>
+        </div>
+        
+        <div class="order">
+            <h2>Order #003</h2>
+            <div class="order-details">
+                <div>
+                    <p><strong>Fish Type:</strong> Mackerel</p>
+                    <p><strong>Quantity:</strong> 200 kg</p>
+                </div>
+                <div>
+                    <p><strong>Buyer:</strong> Seafood International</p>
+                    <p><strong>Estimated Delivery:</strong> July 17, 2024</p>
+                </div>
+            </div>
+            <p><strong>Status:</strong> <span class="order-status">Shipped</span></p>
+        </div>
+        
+        <div class="order">
+            <h2>Order #004</h2>
+            <div class="order-details">
+                <div>
+                    <p><strong>Fish Type:</strong> Cod</p>
+                    <p><strong>Quantity:</strong> 400 kg</p>
+                </div>
+                <div>
+                    <p><strong>Buyer:</strong> Gourmet Fishery</p>
+                    <p><strong>Estimated Delivery:</strong> July 18, 2024</p>
+                </div>
+            </div>
+            <p><strong>Status:</strong> <span class="order-status">Delivered</span></p>
+        </div>
+        
+        <div class="order">
+            <h2>Order #005</h2>
+            <div class="order-details">
+                <div>
+                    <p><strong>Fish Type:</strong> Snapper</p>
+                    <p><strong>Quantity:</strong> 350 kg</p>
+                </div>
+                <div>
+                    <p><strong>Buyer:</strong> Coastal Fresh Ltd.</p>
+                    <p><strong>Estimated Delivery:</strong> July 19, 2024</p>
+                </div>
+            </div>
+            <p><strong>Status:</strong> <span class="order-status">Pending</span></p>
+        </div>
+    </section>
+
+    <section id="support">
+        <h2>Contact</h2>
+        <div id="contactOptions">Contact: Email: fishmarketconnect.ac.ke <br>Phone: +254 712 345 678</div>
+    </section>
+
+    <section id="forums">
+        <h2>Forums</h2>
+        <div id="Fish Communities">Discussion Threads: Fish Communities in the different regions.</div>
+    </section>
+    <div id="fishList" style="display:none;">
+        <h2>Available Fish</h2>
+        <table id="fishTable" border="1">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Price per KG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Fish data will be populated here -->
+          </tbody>
+        </table>
+      </div>
+    <section id="login">
+        <h2>Log In</h2>
+        <div class="login-container">
+            <form id="loginForm">
+            
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <button type="submit">Log In</button>
+            </form>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+              <label for="signupUsername">Username:</label>
+              <input type="text" id="signupUsername" name="username" required><br><br>
+              <label for="signupPassword">Password:</label>
+              <input type="password" id="signupPassword" name="password" required><br><br>
+              <button type="submit">Sign Up</button>
+            </form>
+          
+            
+            
+              <script>
+                // Handle login form submission
+                document.getElementById('loginForm').addEventListener('submit', function(event) {
+                  event.preventDefault();
+            
+                  const username = document.getElementById('loginUsername').value;
+                  const password = document.getElementById('loginPassword').value;
+            
+                  fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.success) {
+                      document.getElementById('fishList').style.display = 'block';
+                      fetchFishData();
+                    } else {
+                      alert(data.message);
+                    }
+                  })
+                  .catch(error => console.error('Error:', error));
+                });
+            
+                // Handle sign-up form submission
+                document.getElementById('signupForm').addEventListener('submit', function(event) {
+                  event.preventDefault();
+            
+                  const username = document.getElementById('signupUsername').value;
+                  const password = document.getElementById('signupPassword').value;
+            
+                  fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                  })
+                  .then(response => response.text())
+                  .then(data => alert(data))
+                  .catch(error => console.error('Error:', error));
+                });
+            
+                // Fetch fish data
+                function fetchFishData() {
+                  fetch('/fish')
+                    .then(response => response.json())
+                    .then(data => {
+                      const tableBody = document.getElementById('fishTable').getElementsByTagName('tbody')[0];
+                      tableBody.innerHTML = '';
+                      data.forEach(fish => {
+                        const row = tableBody.insertRow();
+                        row.insertCell(0).textContent = fish.type;
+                        row.insertCell(1).textContent = fish.price_per_kg;
+                      });
+                    })
+                    .catch(error => console.error('Error:', error));
+                }
+              </script>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 FishMarket Connect. All rights reserved.</p>
+    </footer>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>

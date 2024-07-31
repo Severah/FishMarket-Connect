@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Market</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input, select, button {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .message {
+            color: green;
+            margin-top: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sign Up Form -->
+        <div id="signupSection">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="signupUsername">Username:</label>
+                <input type="text" id="signupUsername" name="username" required>
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" name="password" required>
+                <label for="signupRole">Role:</label>
+                <select id="signupRole" name="role" required>
+                    <option value="admin">Admin</option>
+                    <option value="fisherman">Fisherman</option>
+                    <option value="buyer">Buyer</option>
+                </select>
+                <button type="submit">Sign Up</button>
+                <div id="signupMessage" class="message"></div>
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginSection">
+            <h2>Log In</h2>
+            <form id="loginForm">
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" name="username" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password" required>
+                <button type="submit">Log In</button>
+                <div id="loginMessage" class="message"></div>
+            </form>
+        </div>
+
+        <!-- Log Out Button -->
+        <button id="logoutButton" class="hidden">Log Out</button>
+
+        <!-- View Fish -->
+        <div id="viewFishSection" class="hidden">
+            <h2>Available Fish</h2>
+            <table id="fishTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Price per KG</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Fish rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Order Fish Form -->
+        <div id="orderFishSection" class="hidden">
+            <h2>Order Fish</h2>
+            <form id="orderForm">
+                <label for="orderFishId">Fish ID:</label>
+                <input type="number" id="orderFishId" name="fishId" required>
+                <label for="orderQuantity">Quantity:</label>
+                <input type="number" id="orderQuantity" name="quantity" required>
+                <button type="submit">Order</button>
+                <div id="orderMessage" class="message"></div>
+            </form>
+        </div>
+
+        <!-- Admin Fish Management -->
+        <div id="adminManagementSection" class="hidden">
+            <h2>Admin Fish Management</h2>
+            <form id="adminAddFishForm">
+                <label for="adminFishType">Type:</label>
+                <input type="text" id="adminFishType" name="type" required>
+                <label for="adminFishPrice">Price per KG:</label>
+                <input type="number" id="adminFishPrice" name="price" step="0.01" required>
+                <label for="adminFishQuantity">Quantity:</label>
+                <input type="number" id="adminFishQuantity" name="quantity" required>
+                <button type="submit">Add Fish</button>
+                <div id="adminAddFishMessage" class="message"></div>
+            </form>
+            <form id="adminUpdateFishForm">
+                <label for="adminUpdateFishId">Fish ID:</label>
+                <input type="number" id="adminUpdateFishId" name="id" required>
+                <label for="adminUpdateFishType">Type:</label>
+                <input type="text" id="adminUpdateFishType" name="type">
+                <label for="adminUpdateFishPrice">Price per KG:</label>
+                <input type="number" id="adminUpdateFishPrice" name="price" step="0.01">
+                <label for="adminUpdateFishQuantity">Quantity:</label>
+                <input type="number" id="adminUpdateFishQuantity" name="quantity">
+                <button type="submit">Update Fish</button>
+                <div id="adminUpdateFishMessage" class="message"></div>
+            </form>
+            <form id="adminDeleteFishForm">
+                <label for="adminDeleteFishId">Fish ID:</label>
+                <input type="number" id="adminDeleteFishId" name="id" required>
+                <button type="submit">Delete Fish</button>
+                <div id="adminDeleteFishMessage" class="message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const signupSection = document.getElementById('signupSection');
+        const loginSection = document.getElementById('loginSection');
+        const logoutButton = document.getElementById('logoutButton');
+        const viewFishSection = document.getElementById('viewFishSection');
+        const orderFishSection = document.getElementById('orderFishSection');
+        const adminManagementSection = document.getElementById('adminManagementSection');
+
+        // Handle Sign Up
+        document.getElementById('signupForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+            const role = document.getElementById('signupRole').value;
+
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, role })
+                });
+                const result = await response.text();
+                document.getElementById('signupMessage').textContent = result;
+            } catch (error) {
+                document.getElementById('signupMessage').textContent = 'Error signing up';
+            }
+        });
+
+        // Handle Log In
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    document.getElementById('loginMessage').textContent = 'Login successful';
+                    localStorage.setItem('sessionId', result.sessionId);
+                    localStorage.setItem('role', result.role);
+                    showContentBasedOnRole(result.role);
+                    fetchFish(); // Load fish data
+                } else {
+                    document.getElementById('loginMessage').textContent = 'Login failed: ' + result.message;
+                }
+            } catch (error) {
+                document.getElementById('loginMessage').textContent = 'Error logging in';
+            }
+        });
+
+        // Handle Log Out
+        logoutButton.addEventListener('click', async function() {
+            const sessionId = localStorage.getItem('sessionId');
+            try {
+                await fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Session-Id': sessionId
+                    }
+                });
+                localStorage.removeItem('sessionId');
+                localStorage.removeItem('role');
+                showLoginSection();
+            } catch (error) {
+                console.error('Error logging out:', error);
+            }
+        });
+
+        // Handle Order Fish
+        document.getElementById('orderForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const fishId = document.getElementById('orderFishId').value;
+            const quantity = document.getElementById('orderQuantity').value;
+            const sessionId = localStorage.getItem('sessionId');
+
+            try {
+                const response = await fetch('/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Session-Id': sessionId
+                    },
+                    body: JSON.stringify({ fishId, quantity })
+                });
+                const result = await response.json();
+                document.getElementById('orderMessage').textContent = result.success ? 'Order placed successfully' : result.message;
+                fetchFish(); // Update fish table after order
+            } catch (error) {
+                document.getElementById('orderMessage').textContent = 'Error ordering fish';
+            }
+        });
+
+        // Admin Add Fish
+        document.getElementById('adminAddFishForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const type = document.getElementById('adminFishType').value;
+            const price = document.getElementById('adminFishPrice').value;
+            const quantity = document.getElementById('adminFishQuantity').value;
+
+            try {
+                const response = await fetch('/fish', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type, price, quantity })
+                });
+                const result = await response.json();
+                document.getElementById('adminAddFishMessage').textContent = result.success ? 'Fish added successfully' : result.message;
+                fetchFish(); // Update fish table after adding
+            } catch (error) {
+                document.getElementById('adminAddFishMessage').textContent = 'Error adding fish';
+            }
+        });
+
+        // Admin Update Fish
+        document.getElementById('adminUpdateFishForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const id = document.getElementById('adminUpdateFishId').value;
+            const type = document.getElementById('adminUpdateFishType').value;
+            const price = document.getElementById('adminUpdateFishPrice').value;
+            const quantity = document.getElementById('adminUpdateFishQuantity').value;
+
+            try {
+                const response = await fetch('/fish', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, type, price, quantity })
+                });
+                const result = await response.json();
+                document.getElementById('adminUpdateFishMessage').textContent = result.success ? 'Fish updated successfully' : result.message;
+                fetchFish(); // Update fish table after updating
+            } catch (error) {
+                document.getElementById('adminUpdateFishMessage').textContent = 'Error updating fish';
+            }
+        });
+
+        // Admin Delete Fish
+        document.getElementById('adminDeleteFishForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const id = document.getElementById('adminDeleteFishId').value;
+
+            try {
+                const response = await fetch('/fish', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+                const result = await response.json();
+                document.getElementById('adminDeleteFishMessage').textContent = result.success ? 'Fish deleted successfully' : result.message;
+                fetchFish(); // Update fish table after deleting
+            } catch (error) {
+                document.getElementById('adminDeleteFishMessage').textContent = 'Error deleting fish';
+            }
+        });
+
+        function showContentBasedOnRole(role) {
+            loginSection.classList.add('hidden');
+            logoutButton.classList.remove('hidden');
+            viewFishSection.classList.remove('hidden');
+            if (role === 'buyer') {
+                orderFishSection.classList.remove('hidden');
+                adminManagementSection.classList.add('hidden');
+            } else {
+                orderFishSection.classList.add('hidden');
+                if (role === 'admin') {
+                    adminManagementSection.classList.remove('hidden');
+                } else {
+                    adminManagementSection.classList.add('hidden');
+                }
+            }
+        }
+
+        function showLoginSection() {
+            loginSection.classList.remove('hidden');
+            logoutButton.classList.add('hidden');
+            viewFishSection.classList.add('hidden');
+            orderFishSection.classList.add('hidden');
+            adminManagementSection.classList.add('hidden');
+        }
+
+        async function fetchFish() {
+            try {
+                const response = await fetch('/fish');
+                const fishData = await response.json();
+                const tableBody = document.getElementById('fishTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                fishData.forEach(fish => {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).textContent = fish.id;
+                    row.insertCell(1).textContent = fish.type;
+                    row.insertCell(2).textContent = fish.price_per_kg;
+                    row.insertCell(3).textContent = fish.quantity;
+                });
+            } catch (error) {
+                console.error('Error fetching fish data:', error);
+            }
+        }
+
+        // Initial page setup
+        if (localStorage.getItem('sessionId') && localStorage.getItem('role')) {
+            showContentBasedOnRole(localStorage.getItem('role'));
+            fetchFish(); // Load fish data if logged in
+        } else {
+            showLoginSection();
+        }
+    </script>
+</body>
+</html>
